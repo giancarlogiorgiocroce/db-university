@@ -1,0 +1,44 @@
+ESERCIZIO 1:
+SELECT `students`.`registration_number` AS `matricola`, `students`.`name` AS `nome`, `students`.`surname` AS `cognome`
+FROM `students`
+JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`
+WHERE `degrees`.`name` = 'Corso di Laurea in Economia';
+
+ESERCIZIO 2: (Mi fa ridere che Odontoiatria sia dentro le Neuroscienze)
+SELECT `degrees`.`name`, `degrees`.`level`
+FROM `degrees`
+JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
+WHERE `departments`.`name` = 'Dipartimento di Neuroscienze';
+
+ESERCIZIO 3:
+SELECT `courses`.`name`, `courses`.`period`, `courses`.`year`
+FROM `courses`
+JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id`
+JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`
+WHERE `teachers`.`name` = 'Fulvio'
+AND `teachers`.`surname` = 'Amato';
+
+ESERCIZIO 4:
+SELECT `students`.`surname`, `students`.`name`, `students`.`registration_number`, `degrees`.`name`, `departments`.`name`
+FROM `students`
+JOIN `degrees` ON `students`.`degree_id` = `degrees`.`id`
+JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
+ORDER BY `students`.`surname`, `students`.`name`;
+
+ESERCIZIO 5:
+SELECT `degrees`.`name` AS `nome_laurea`, `courses`.`name` AS `nome_corso`, `courses`.`cfu`, `teachers`.`surname` AS `professore`
+FROM `degrees`
+JOIN `courses` ON `degrees`.`id` = `courses`.`degree_id`
+JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id`
+JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`;
+
+ESERCIZIO 6:
+SELECT `teachers`.`surname` AS `professore`
+FROM `teachers`
+JOIN `course_teacher` ON `teachers`.`id` = `course_teacher`.`teacher_id`
+JOIN `courses` ON `course_teacher`.`course_id` = `courses`.`id`
+JOIN `degrees` ON `courses`.`degree_id` = `degrees`.`id`
+JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
+WHERE `departments`.`name` = 'Dipartimento di Matematica';
+
+ESERCIZIO 7:
