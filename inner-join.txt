@@ -33,7 +33,7 @@ JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id`
 JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`;
 
 ESERCIZIO 6:
-SELECT `teachers`.`surname` AS `professore`
+SELECT DISTINCT `teachers`.*
 FROM `teachers`
 JOIN `course_teacher` ON `teachers`.`id` = `course_teacher`.`teacher_id`
 JOIN `courses` ON `course_teacher`.`course_id` = `courses`.`id`
@@ -42,9 +42,10 @@ JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
 WHERE `departments`.`name` = 'Dipartimento di Matematica';
 
 ESERCIZIO 7:
-SELECT `students`.`surname` AS `studente`, `students`.`registration_number` AS `matricola`, COUNT(`exam_student`.`student_id`) AS `numero_tentativi`, `courses`.`name` AS `per_il_corso`
+SELECT `students`.`surname` AS `studente`, `students`.`registration_number` AS `matricola`, COUNT(`exam_student`.`vote`) AS `numero_tentativi`, `courses`.`name` AS `per_il_corso`, MAX(`exam_student`.`vote`) AS `voto_massimo`
 FROM `students`
 JOIN `exam_student` ON `students`.`id` = `exam_student`.`student_id`
 JOIN `exams` ON `exam_student`.`exam_id` = `exams`.`id`
 JOIN `courses` ON `exams`.`course_id` = `courses`.`id`
-GROUP BY `studente`, `matricola`, `per_il_corso`;
+GROUP BY `studente`, `matricola`, `per_il_corso`
+HAVING `voto_massimo` >= 18;

@@ -9,7 +9,7 @@ FROM `teachers`
 GROUP BY `office_address`;
 
 ESERCIZIO 3:
-SELECT `exam_id`, AVG(`vote`) AS `media`
+SELECT `exam_id`, ROUND(AVG(`vote`)) AS `media`
 FROM `exam_student` 
 GROUP BY `exam_id`;
 
